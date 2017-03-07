@@ -137,24 +137,30 @@
 </script>
 
 <h1>Adelphic Macro Injecter</h1>
-<p style="font-size:14px; vertical-align:middle;">Select ad-server:  
 
-	<select name="adserver" id="adserver">
+<table style="width:600px">
+  <tr>
+    <td><p style="font-size:14px; vertical-align:middle;">Select ad-server: </p></td>
+    <td><select name="adserver" id="adserver">
 	<option value="Sizmek">Sizmek</option>
 	<option value="Adform">Adform</option>
-	</select>
+	</select></td> 
+  </tr>
+  <tr>
+    <td><p style="font-size:14px">Insert tag/tracking pixel here: </p></td>
+    <td><textarea name="tag" id="tag" style="vertical-align:top; width:470px; height:200px"></textarea></td> 
+  </tr>
+  <tr>
+  	<td></td>
+  	<td style="text-align: right"><button type="Insert" onclick="addMacros(document.getElementById('adserver').value, document.getElementById('tag').value)">Insert macros</button></td>
+  </tr>
+  <tr style="height: 40px"><td></td><td></td></tr>
+  <tr>
+  	<td><p style="font-size:14px">Tag/pixel with Adelphic macros: </p></td>
+  	<td><textarea name="tagwithmacros" id="tagwithmacros" style="vertical-align:top; width:470px; height:200px"></textarea></td>
+  </tr>
+</table>
 
-</p>
-
-<p style="font-size:14px">Insert tag/tracking pixel here: 
-	<textarea name="tag" id="tag" style="vertical-align:top; width:500px; height:200px"></textarea>
-</p>
-
-<button type="Insert" onclick="addMacros(document.getElementById('adserver').value, document.getElementById('tag').value)">Insert macros</button>
-
-<p style="font-size:14px">Tag with Adelphic macros: 
-	<textarea name="tagwithmacros" id="tagwithmacros" style="vertical-align:top; width:500px; height:200px"></textarea>
-</p>
 
 </body>
 </html>
