@@ -99,15 +99,15 @@
 			{
 				finaltag = finaltag.replace("click\=", "click\="+clickmacronordenc)
 				var modtag = finaltag.split("\<a href\=\"");
-				finaltag = modtag[0]+"\<a href\=\"\$\{ADELPHIC_CLICK_REDIRECT_PROVIDED\}"+modtag[1];
+				finaltag = modtag[0]+"\<a href\=\""+clickmacrord+"\}"+modtag[1];
 
 			}
 
 			else{
 					var modtag = finaltag.split("\"\>\<\/script");
-					finaltag = modtag[0]+"\;click\=\$\{ADELPHIC_CLICK_REDIRECT_PROVIDED\}\"\>\<\/script"+modtag[1];
+					finaltag = modtag[0]+"\;click\=\""+clickmacrord+"\"\>\<\/script"+modtag[1];
 					modtag = finaltag.split("\<a href\=\"");
-					finaltag = modtag[0]+"\<a href\=\"\$\{ADELPHIC_CLICK_REDIRECT_PROVIDED\}"+modtag[1];
+					finaltag = modtag[0]+"\<a href\=\""+clickmacrord+modtag[1];
 
 			}
 		}
