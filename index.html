@@ -19,6 +19,15 @@
 
 		document.getElementById("errormsg").innerHTML = ""; // Initialize error message
 		document.getElementById("tagwithmacros").value = ""; // Initialize output textbox
+
+
+		if (tag.indexOf("ADELPHIC") != -1) {
+
+			document.getElementById("errormsg").innerHTML = "Please review your tag, looks like Adelphic's macros are already there."
+			return;
+		}
+
+
 		//validateTag(adserver, tag)
 		switch (adserver)
 		{
@@ -31,7 +40,7 @@
 
 				if (tag.indexOf("bs.serving-sys.com") == -1) {
 
-					document.getElementById("errormsg").innerHTML = "Please review your tag, it doesn't look like a Sizmek tag"
+					document.getElementById("errormsg").innerHTML = "Please review your tag, it doesn't look like a Sizmek tag."
 					break
 				}
 
