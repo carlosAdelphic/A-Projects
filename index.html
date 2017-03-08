@@ -17,119 +17,121 @@
 	function addMacros (adserver, tag)
 	{
 
-		if (adserver == "Sizmek")
+		//validateTag(adserver, tag)
+		switch (adserver)
 		{
-			var cbm = tag.indexOf("\&ord");
-			var cm = tag.indexOf("\&ncu");
-			var px = tag.indexOf("script"); // if there's no "script" then we can assume they are pixels
 
-			if (px == -1) // pixels have been input (no tag)
-			{
-				if (tag.indexOf("Timestamp") != -1) {
+			case ("Sizmek"):
 
-					finaltag = tag.replaceAll("[Timestamp]", cbmacro);
-				}
-				else {
+				var cbm = tag.indexOf("\&ord");
+				var cm = tag.indexOf("\&ncu");
+				var px = tag.indexOf("script"); // if there's no "script" then we can assume they are pixels
 
-					finaltag = tag.replaceAll("[timestamp]", cbmacro);
-				}
-
-			}
-
-			else{
-
-				if (cbm != -1) // if the "ord" variable is already present in the tag 
+				if (px == -1) // pixels have been input (no tag)
 				{
-					var totph // variable to know the number of placeholders for the cb macro
 					if (tag.indexOf("Timestamp") != -1) {
 
-						totph = tag.match(/Timestamp/g).length; 
 						finaltag = tag.replaceAll("[Timestamp]", cbmacro);
 					}
 					else {
 
-						totph = tag.match(/timestamp/g).length; 
 						finaltag = tag.replaceAll("[timestamp]", cbmacro);
 					}
-
-					//console.log(tag.match(/Timestamp/g).length);
-					if (totph < 2) // if the "ord" variable is only present in the script part of the tag
-					{
-						var insertedcachebuster = "\&ord\="+cbmacro+"\&FlightID"
-						finaltag = finaltag.replaceAll("\&FlightID", insertedcachebuster)
-					}
-					
-					
-				}
-
-				else{ // no "ord" variable in the tag, so we add it
-
-					var insertedcachebuster = "\&ord\="+cbmacro+"\&FlightID"
-					finaltag = tag.replaceAll("\&FlightID", insertedcachebuster)
-					var modtag = finaltag.split("\"\>\</script");
-					finaltag = modtag[0]+"\&ord\="+cbmacro+"\"\>\<\/script"+modtag[1];
-
-
-				}
-
-				if (cm != -1) // if the clickmacro variable is already in the tag we replace the placeholder value
-				{
-					if (tag.indexOf("Click") != -1)
-					finaltag = finaltag.replace("[Click]", clickmacronordenc)
-					else if (tag.indexOf("click") != -1)
-					finaltag = finaltag.replace("[click]", clickmacronordenc)
 
 				}
 
 				else{
 
-						finaltag = finaltag.replace ("\"\>\</script", "\&ncu\=$$$$$"+clickmacronordenc+"$$$\"\<\/script");
+					if (cbm != -1) // if the "ord" variable is already present in the tag 
+					{
+						var totph // variable to know the number of placeholders for the cb macro
+						if (tag.indexOf("Timestamp") != -1) {
+
+							totph = tag.match(/Timestamp/g).length; 
+							finaltag = tag.replaceAll("[Timestamp]", cbmacro);
+						}
+						else {
+
+							totph = tag.match(/timestamp/g).length; 
+							finaltag = tag.replaceAll("[timestamp]", cbmacro);
+						}
+
+						//console.log(tag.match(/Timestamp/g).length);
+						if (totph < 2) // if the "ord" variable is only present in the script part of the tag
+						{
+							var insertedcachebuster = "\&ord\="+cbmacro+"\&FlightID"
+							finaltag = finaltag.replaceAll("\&FlightID", insertedcachebuster)
+						}
+						
+						
+					}
+
+					else{ // no "ord" variable in the tag, so we add it
+
+						var insertedcachebuster = "\&ord\="+cbmacro+"\&FlightID"
+						finaltag = tag.replaceAll("\&FlightID", insertedcachebuster)
+						var modtag = finaltag.split("\"\>\</script");
+						finaltag = modtag[0]+"\&ord\="+cbmacro+"\"\>\<\/script"+modtag[1];
+
+
+					}
+
+					if (cm != -1) // if the clickmacro variable is already in the tag we replace the placeholder value
+					{
+						if (tag.indexOf("Click") != -1)
+						finaltag = finaltag.replace("[Click]", clickmacronordenc)
+						else if (tag.indexOf("click") != -1)
+						finaltag = finaltag.replace("[click]", clickmacronordenc)
+
+					}
+
+					else{
+
+							finaltag = finaltag.replace ("\"\>\</script", "\&ncu\=$$$$$"+clickmacronordenc+"$$$\"\<\/script");
+
+					}
+				}
+				document.getElementById('tagwithmacros').value = finaltag;
+				break;
+
+				
+
+			case ("Adform"):
+
+				var cbm = tag.indexOf("\;ord");
+				var cm = tag.indexOf("\;click");
+
+				if (cbm != -1)
+				{
+					finaltag = tag.replaceAll("[timestamp]", cbmacro);
+				}
+
+				else{
+
+					//Generally the cachebuster variable is there
 
 				}
-			}
+
+				if (cm != -1)
+				{
+					finaltag = finaltag.replace("click\=", "click\="+clickmacronordenc)
+					var modtag = finaltag.split("\<a href\=\"");
+					finaltag = modtag[0]+"\<a href\=\""+clickmacrord+"\}"+modtag[1];
+
+				}
+
+				else{
+						var modtag = finaltag.split("\"\>\<\/script");
+						finaltag = modtag[0]+"\;click\=\""+clickmacrord+"\"\>\<\/script"+modtag[1];
+						modtag = finaltag.split("\<a href\=\"");
+						finaltag = modtag[0]+"\<a href\=\""+clickmacrord+modtag[1];
+
+				}
+				document.getElementById('tagwithmacros').value = finaltag;
+				break;
+
+
 		}
-
-			
-
-		else if (adserver == "Adform")
-		{
-
-			var cbm = tag.indexOf("\;ord");
-			var cm = tag.indexOf("\;click");
-
-			if (cbm != -1)
-			{
-				finaltag = tag.replaceAll("[timestamp]", cbmacro);
-			}
-
-			else{
-
-				//Generally the cachebuster variable is there
-
-			}
-
-			if (cm != -1)
-			{
-				finaltag = finaltag.replace("click\=", "click\="+clickmacronordenc)
-				var modtag = finaltag.split("\<a href\=\"");
-				finaltag = modtag[0]+"\<a href\=\""+clickmacrord+"\}"+modtag[1];
-
-			}
-
-			else{
-					var modtag = finaltag.split("\"\>\<\/script");
-					finaltag = modtag[0]+"\;click\=\""+clickmacrord+"\"\>\<\/script"+modtag[1];
-					modtag = finaltag.split("\<a href\=\"");
-					finaltag = modtag[0]+"\<a href\=\""+clickmacrord+modtag[1];
-
-			}
-		}
-
-	
-
-			document.getElementById('tagwithmacros').value = finaltag;
-
-		
 
 	}
 
@@ -158,13 +160,17 @@
   	<td></td>
   	<td style="text-align: right"><button type="Insert" onclick="addMacros(document.getElementById('adserver').value, document.getElementById('tag').value)">Insert macros</button></td>
   </tr>
-  <tr style="height: 40px"><td></td><td></td></tr>
+  <tr style="height: 40px">
+  	<td colspan="2" id="errormsg"></td></tr>
   <tr>
   	<td><p style="font-size:14px">Tag/pixels with Adelphic macros: </p></td>
   	<td><textarea name="tagwithmacros" id="tagwithmacros" style="vertical-align:top; width:470px; height:200px"></textarea></td>
   </tr>
-  <tr style="height: 50px; font-size: 14px; vertical-align:bottom; ">
-  	<td><a href="versioncontrol.html" target="_blank">Version control</a></td>
+  <tr style="height: 40px; font-size: 14px; vertical-align:bottom; "">
+  	<td colspan="2">Not working or having an issue?Let us know <a href="mailto:carlos@adelphic.com?subject=Issues with my tag&body=Please remember to add the tag you're having issues with here">here</a></td>
+  </tr>
+  <tr style="height: 20px; font-size: 14px; vertical-align:bottom; ">
+  	<td colspan="2"><a href="versioncontrol.html" target="_blank">Version control</a></td>
   </tr>
 </table>
 
