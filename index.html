@@ -7,47 +7,48 @@
 </head>
 <body>
 
-<header role="banner" id="header" style="margin-top: 20px; margin-left: 15px">
+	<header role="banner" id="header" style="margin-top: 20px; margin-left: 15px">
 
-<div id="logo"><a title="Mobile and cross-device demand side platform" href="http://adelphic.com"><img src="http://adelphic.com/wp-content/themes/adelp/images/adelphic-logo.png"/></a></div>
-<div id="title"><h1>Macro Injecter v1.0</h1></div>
-</header>
+		<div id="logo"><a title="Mobile and cross-device demand side platform" href="http://adelphic.com"><img src="http://adelphic.com/wp-content/themes/adelp/images/adelphic-logo.png"/></a></div>
+		<div id="title"><h1>Macro Injecter v1.0</h1></div>
 
-<table style="width:600px; margin-left: 15px">
-  <tr>
-    <td><p style="font-size:14px; vertical-align:middle;">Select ad-server: </p></td>
-    <td><select name="adserver" id="adserver">
-	<option value="Sizmek">Sizmek</option>
-	<option value="Adform">Adform</option>
-	</select></td> 
-  </tr>
-  <tr>
-    <td><p style="font-size:14px">Insert single tag/tracking pixels here: </p></td>
-    <td><textarea name="tag" id="tag" style="vertical-align:top; width:470px; height:200px"></textarea></td> 
-  </tr>
-  <tr>
-  	<td></td>
-  	<td style="text-align: right"><button type="Insert" onclick="addMacros(document.getElementById('adserver').value, document.getElementById('tag').value)">Insert macros</button></td>
-  </tr>
-  <tr style="height: 20px">
-  	<td></td>
-  	<td colspan="2" id="errormsg" style="color: red; font-size:14px"></td>
-  </tr>
-  <tr>
-  	<td><p style="font-size:14px">Tag/pixels with Adelphic macros: </p></td>
-  	<td><textarea name="tagwithmacros" id="tagwithmacros" style="vertical-align:top; width:470px; height:200px"></textarea></td>
-  </tr>
-  <tr>
-  	<td><p style="font-size:14px">Image URL: </p></td>
-  	<td><textarea name="imageurl" id="imageurl" style="vertical-align:top; width:470px; height:20px"></textarea></td>
-  </tr>
-  <tr style="height: 40px; font-size: 14px; vertical-align:bottom; "">
-  	<td colspan="2">Not working or having an issue?Let us know <a href="mailto:carlos@adelphic.com?subject=Issues with my tag&body=Please remember to add the tag you're having issues with here">here</a></td>
-  </tr>
-  <tr style="height: 20px; font-size: 14px; vertical-align:bottom; ">
-  	<td colspan="2"><a href="versioncontrol.html" target="_blank">Version control</a></td>
-  </tr>
-</table>
+	</header>
+
+	<table style="width:600px; margin-left: 15px">
+	  <tr>
+	    <td><p style="font-size:14px; vertical-align:middle;">Select ad-server: </p></td>
+	    <td><select name="adserver" id="adserver">
+		<option value="Sizmek">Sizmek</option>
+		<option value="Adform">Adform</option>
+		</select></td> 
+	  </tr>
+	  <tr>
+	    <td><p style="font-size:14px">Insert single tag/tracking pixels here: </p></td>
+	    <td><textarea name="tag" id="tag" style="vertical-align:top; width:470px; height:200px"></textarea></td> 
+	  </tr>
+	  <tr>
+	  	<td></td>
+	  	<td style="text-align: right"><button type="Insert" onclick="addMacros(document.getElementById('adserver').value, document.getElementById('tag').value)">Insert macros</button></td>
+	  </tr>
+	  <tr style="height: 20px">
+	  	<td></td>
+	  	<td colspan="2" id="errormsg" style="color: red; font-size:14px"></td>
+	  </tr>
+	  <tr>
+	  	<td><p style="font-size:14px">Tag/pixels with Adelphic macros: </p></td>
+	  	<td><textarea name="tagwithmacros" id="tagwithmacros" style="vertical-align:top; width:470px; height:200px"></textarea></td>
+	  </tr>
+	  <tr>
+	  	<td><p style="font-size:14px">Image URL: </p></td>
+	  	<td><textarea name="imageurl" id="imageurl" style="vertical-align:top; width:470px; height:20px"></textarea></td>
+	  </tr>
+	  <tr style="height: 40px; font-size: 14px; vertical-align:bottom; "">
+	  	<td colspan="2">Not working or having an issue?Let us know <a href="mailto:carlos@adelphic.com?subject=Issues with my tag&body=Please remember to add the tag you're having issues with here">here</a></td>
+	  </tr>
+	  <tr style="height: 20px; font-size: 14px; vertical-align:bottom; ">
+	  	<td colspan="2"><a href="versioncontrol.html" target="_blank">Version control</a></td>
+	  </tr>
+	</table>
 
 
 </body>
