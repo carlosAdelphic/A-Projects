@@ -166,5 +166,4 @@ function addMacros (adserver, tag)
 		document.getElementById('imageurl').innerHTML = "No image found in the tag";
 	}
 
-
 }
