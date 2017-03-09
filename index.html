@@ -1,173 +1,50 @@
 <!DOCTYPE html>
 <html>
+<head>
+	<script type="text/javascript" src="script.js"></script>
+</head>
 <body>
 
-<script type="text/javascript">
-	
-	var clickmacrord =  "${ADELPHIC_CLICK_REDIRECT_PROVIDED}";
-	var clickmacronord =  "${ADELPHIC_CLICK_NOREDIRCT}";
-	var clickmacronordenc = "${ADELPHIC_CLICK_NOREDIRECT_ENC}";
-	var cbmacro = "${ADELPHIC_CACHE_BUSTER}";
-	var finaltag = "";
+	<header role="banner" id="header" style="margin-top: 20px; margin-left: 15px">
+		<div id="logo"><a title="Mobile and cross-device demand side platform" href="http://adelphic.com"><img src="http://adelphic.com/wp-content/themes/adelp/images/adelphic-logo.png"/></a></div>
+		<div id="title"><h1>Macro Injecter v1.1</h1></div>
+	</header>
 
-	String.prototype.replaceAll = function(target, replacement) {
-  		return this.split(target).join(replacement);
-	};
-
-	function addMacros (adserver, tag)
-	{
-
-		if (adserver == "Sizmek")
-		{
-			var cbm = tag.indexOf("\&ord");
-			var cm = tag.indexOf("\&ncu");
-			var px = tag.indexOf("script"); // if there's no "script" then we can assume they are pixels
-
-			if (px == -1) // pixels have been input (no tag)
-			{
-				if (tag.indexOf("Timestamp") != -1) {
-
-					finaltag = tag.replaceAll("[Timestamp]", cbmacro);
-				}
-				else {
-
-					finaltag = tag.replaceAll("[timestamp]", cbmacro);
-				}
-
-			}
-
-			else{
-
-				if (cbm != -1) // if the "ord" variable is already present in the tag 
-				{
-					var totph // variable to know the number of placeholders for the cb macro
-					if (tag.indexOf("Timestamp") != -1) {
-
-						totph = tag.match(/Timestamp/g).length; 
-						finaltag = tag.replaceAll("[Timestamp]", cbmacro);
-					}
-					else {
-
-						totph = tag.match(/timestamp/g).length; 
-						finaltag = tag.replaceAll("[timestamp]", cbmacro);
-					}
-
-					//console.log(tag.match(/Timestamp/g).length);
-					if (totph < 2) // if the "ord" variable is only present in the script part of the tag
-					{
-						var insertedcachebuster = "\&ord\="+cbmacro+"\&FlightID"
-						finaltag = finaltag.replaceAll("\&FlightID", insertedcachebuster)
-					}
-					
-					
-				}
-
-				else{ // no "ord" variable in the tag, so we add it
-
-					var insertedcachebuster = "\&ord\="+cbmacro+"\&FlightID"
-					finaltag = tag.replaceAll("\&FlightID", insertedcachebuster)
-					var modtag = finaltag.split("\"\>\</script");
-					finaltag = modtag[0]+"\&ord\="+cbmacro+"\"\>\<\/script"+modtag[1];
-
-
-				}
-
-				if (cm != -1) // if the clickmacro variable is already in the tag we replace the placeholder value
-				{
-					if (tag.indexOf("Click") != -1)
-					finaltag = finaltag.replace("[Click]", clickmacronordenc)
-					else if (tag.indexOf("click") != -1)
-					finaltag = finaltag.replace("[click]", clickmacronordenc)
-
-				}
-
-				else{
-
-						finaltag = finaltag.replace ("\"\>\</script", "\&ncu\=$$$$$"+clickmacronordenc+"$$$\"\<\/script");
-
-				}
-			}
-		}
-
-			
-
-		else if (adserver == "Adform")
-		{
-
-			var cbm = tag.indexOf("\;ord");
-			var cm = tag.indexOf("\;click");
-
-			if (cbm != -1)
-			{
-				finaltag = tag.replaceAll("[timestamp]", cbmacro);
-			}
-
-			else{
-
-				//Generally the cachebuster variable is there
-
-			}
-
-			if (cm != -1)
-			{
-				finaltag = finaltag.replace("click\=", "click\="+clickmacronordenc)
-				var modtag = finaltag.split("\<a href\=\"");
-				finaltag = modtag[0]+"\<a href\=\""+clickmacrord+"\}"+modtag[1];
-
-			}
-
-			else{
-					var modtag = finaltag.split("\"\>\<\/script");
-					finaltag = modtag[0]+"\;click\=\""+clickmacrord+"\"\>\<\/script"+modtag[1];
-					modtag = finaltag.split("\<a href\=\"");
-					finaltag = modtag[0]+"\<a href\=\""+clickmacrord+modtag[1];
-
-			}
-		}
-
-	
-
-			document.getElementById('tagwithmacros').value = finaltag;
-
-		
-
-	}
-
-
-</script>
-
-<header role="banner" id="header" style="margin-top: 20px; margin-left: 20px">
-
-<div id="logo"><a title="Mobile and cross-device demand side platform" href="http://adelphic.com"><img src="http://adelphic.com/wp-content/themes/adelp/images/adelphic-logo.png"/></a></div>
-<div id="title"><h1>Macro Injecter v1.0</h1></div>
-</header>
-
-<table style="width:600px; margin-left: 20px">
-  <tr>
-    <td><p style="font-size:14px; vertical-align:middle;">Select ad-server: </p></td>
-    <td><select name="adserver" id="adserver">
-	<option value="Sizmek">Sizmek</option>
-	<option value="Adform">Adform</option>
-	</select></td> 
-  </tr>
-  <tr>
-    <td><p style="font-size:14px">Insert single tag/tracking pixels here: </p></td>
-    <td><textarea name="tag" id="tag" style="vertical-align:top; width:470px; height:200px"></textarea></td> 
-  </tr>
-  <tr>
-  	<td></td>
-  	<td style="text-align: right"><button type="Insert" onclick="addMacros(document.getElementById('adserver').value, document.getElementById('tag').value)">Insert macros</button></td>
-  </tr>
-  <tr style="height: 40px"><td></td><td></td></tr>
-  <tr>
-  	<td><p style="font-size:14px">Tag/pixels with Adelphic macros: </p></td>
-  	<td><textarea name="tagwithmacros" id="tagwithmacros" style="vertical-align:top; width:470px; height:200px"></textarea></td>
-  </tr>
-  <tr style="height: 50px; font-size: 14px; vertical-align:bottom; ">
-  	<td><a href="http://htmlpreview.github.io/?https://github.com/carlosAdelphic/A-Projects/blob/Sites/versioncontrol.html" target="_blank">Version control</a></td>
-  </tr>
-</table>
-
+	<table style="width:700px; margin-left: 15px">
+	  <tr>
+	    <td><p style="font-size:14px; vertical-align:middle;">Select ad-server: </p></td>
+	    <td><select name="adserver" id="adserver">
+		<option value="Sizmek">Sizmek</option>
+		<option value="Adform">Adform</option>
+		</select></td> 
+	  </tr>
+	  <tr>
+	    <td><p style="font-size:14px">Insert single tag/tracking pixels here: </p></td>
+	    <td><textarea name="tag" id="tag" style="vertical-align:top; width:650px; height:155px"></textarea></td> 
+	  </tr>
+	  <tr>
+	  	<td></td>
+	  	<td style="text-align: left"><button type="Insert" onclick="addMacros(document.getElementById('adserver').value, document.getElementById('tag').value)">Insert macros</button></td>
+	  </tr>
+	  <tr style="height: 20px">
+	  	<td></td>
+	  	<td colspan="2" id="errormsg" style="color: red; font-size:14px"></td>
+	  </tr>
+	  <tr>
+	  	<td><p style="font-size:14px">Tag/pixels with Adelphic macros: </p></td>
+	  	<td><textarea name="tagwithmacros" id="tagwithmacros" style="vertical-align:top; width:650px; height:155px"></textarea></td>
+	  </tr>
+	  <tr>
+	  	<td><p style="font-size:14px">Image URL: </p></td>
+	  	<td><textarea name="imageurl" id="imageurl" style="vertical-align:top; width:650px; height:15px"></textarea></td>
+	  </tr>
+	  <tr style="height: 40px; font-size: 14px; vertical-align:bottom; "">
+	  	<td colspan="2">Not working or having an issue?Let us know <a href="mailto:carlos@adelphic.com?subject=Issues with my tag&body=Please remember to add the tag you're having issues with here">here</a></td>
+	  </tr>
+	  <tr style="height: 20px; font-size: 14px; vertical-align:bottom; ">
+	  	<td colspan="2"><a href="versioncontrol.html" target="_blank">Version control</a></td>
+	  </tr>
+	</table>
 
 </body>
 </html>
