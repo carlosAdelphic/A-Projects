@@ -68,7 +68,6 @@ function addMacros (adserver, tag)
 						finaltag = tag.replaceAll("[timestamp]", cbmacro);
 					}
 
-					//console.log(tag.match(/Timestamp/g).length);
 					if (totph < 2) // if the "ord" variable is only present in the script part of the tag
 					{
 						var insertedcachebuster = "\&ord\="+cbmacro+"\&FlightID"
