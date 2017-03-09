@@ -152,9 +152,10 @@ function addMacros (adserver, tag)
 
 	}
 
-	if (document.images.length == 0) document.getElementById('imageurl').innerHTML = "No image found in the tag"
-	else document.getElementById('imageurl').innerHTML = document.images[0].src;
-	console.log(document.images.length);
-	console.log(document.images[0].src);
+	var regex = /<img.*?src=['"](.*?)['"]/;
+	var src = regex.exec(finaltag)[1];
+	
+	if (src.length == 0) document.getElementById('imageurl').innerHTML = "No image found in the tag"
+	else document.getElementById('imageurl').innerHTML = src;
 
 }
