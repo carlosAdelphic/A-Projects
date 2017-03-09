@@ -101,6 +101,7 @@ function addMacros (adserver, tag)
 						finaltag = finaltag.replace ("\"\>\</script", "\&ncu\=$$$$$"+clickmacronordenc+"$$$\"\<\/script");
 
 				}
+
 			}
 			document.getElementById('tagwithmacros').value = finaltag;
 			break;
@@ -144,10 +145,16 @@ function addMacros (adserver, tag)
 					finaltag = modtag[0]+"\<a href\=\""+clickmacrord+modtag[1];
 
 			}
+			
 			document.getElementById('tagwithmacros').value = finaltag;
 			break;
 
 
 	}
+
+	if (document.images.length == 0) document.getElementById('imageurl').innerHTML = "No image found in the tag"
+	else document.getElementById('imageurl').innerHTML = document.images[0].src;
+	console.log(document.images.length);
+	console.log(document.images[0].src);
 
 }
