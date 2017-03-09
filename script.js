@@ -149,7 +149,6 @@ function addMacros (adserver, tag)
 			document.getElementById('tagwithmacros').value = finaltag;
 			break;
 
-
 	}
 
 	var regex = /<img.*?src=['"](.*?)['"]/;
