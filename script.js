@@ -13,6 +13,7 @@ function addMacros (adserver, tag)
 
 	document.getElementById("errormsg").innerHTML = ""; // Initialize error message
 	document.getElementById("tagwithmacros").value = ""; // Initialize output textbox
+	document.getElementById('imageurl').style.color = "black"; //initialize color image url textbox (goes red if image url not found)
 
 
 	if (tag.indexOf("ADELPHIC") != -1) {
@@ -152,9 +153,18 @@ function addMacros (adserver, tag)
 	}
 
 	var regex = /<img.*?src=['"](.*?)['"]/;
-	var src = regex.exec(finaltag)[1];
-	
-	if (src.length == 0) document.getElementById('imageurl').innerHTML = "No image found in the tag"
-	else document.getElementById('imageurl').innerHTML = src;
+
+	if (regex.exec(finaltag) != null)
+	{
+	 var src = regex.exec(finaltag)[1];
+	 document.getElementById('imageurl').innerHTML = src;
+	}
+
+	else {
+
+		document.getElementById('imageurl').style.color = "red";
+		document.getElementById('imageurl').innerHTML = "No image found in the tag";
+	}
+
 
 }
