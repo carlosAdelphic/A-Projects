@@ -72,8 +72,7 @@ function addMacros (adserver, tag)
 					{
 						var insertedcachebuster = "\&ord\="+cbmacro+"\&FlightID"
 						finaltag = finaltag.replaceAll("\&FlightID", insertedcachebuster)
-					}
-					
+					}				
 					
 				}
 
@@ -83,8 +82,6 @@ function addMacros (adserver, tag)
 					finaltag = tag.replaceAll("\&FlightID", insertedcachebuster)
 					var modtag = finaltag.split("\"\>\</script");
 					finaltag = modtag[0]+"\&ord\="+cbmacro+"\"\>\<\/script"+modtag[1];
-
-
 				}
 
 				if (cm != -1) // if the clickmacro variable is already in the tag we replace the placeholder value
@@ -93,12 +90,11 @@ function addMacros (adserver, tag)
 					finaltag = finaltag.replace("[Click]", clickmacronordenc)
 					else if (tag.indexOf("click") != -1)
 					finaltag = finaltag.replace("[click]", clickmacronordenc)
-
 				}
 
 				else{
 
-						finaltag = finaltag.replace ("\"\>\</script", "\&ncu\=$$$$$"+clickmacronordenc+"$$$\"\<\/script");
+						finaltag = finaltag.replace ("\"\>\</script", "\&ncu\=$$$$$"+clickmacronordenc+"$$$\"\>\<\/script");
 
 				}
 
