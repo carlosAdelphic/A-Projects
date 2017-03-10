@@ -99,7 +99,7 @@ function addMacros (adserver, tag)
 
 				else{
 
-						finaltag = finaltag.replace ("\"\>\</script", "\&ncu\=$$$$$"+clickmacronordenc+"$$$\"\<\/script");
+						finaltag = finaltag.replace ("\"\>\</script", "\&ncu\=$$$$$"+clickmacronordenc+"$$$\"\>\<\/script");
 
 				}
 
