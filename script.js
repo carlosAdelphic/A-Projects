@@ -146,7 +146,7 @@ function addMacros (adserver, tag)
 
 	}
 
-	case ("Weborama"):
+			case ("Weborama"):
 
 			var cbm = tag.indexOf("random");
 			var cm = tag.indexOf("publisherclick");
@@ -177,7 +177,6 @@ function addMacros (adserver, tag)
 			}
 
 			else{
-					
 
 			}
 			
