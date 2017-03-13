@@ -144,11 +144,7 @@ function addMacros (adserver, tag)
 			document.getElementById('tagwithmacros').value = finaltag;
 			break;
 
-
-	}
-
-
-			case ("Weborama"):
+		case ("Weborama"):
 
 			var cbm = tag.indexOf("random");
 			var cm = tag.indexOf("publisherclick");
