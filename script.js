@@ -177,10 +177,7 @@ function addMacros (adserver, tag)
 			}
 
 			else{
-					var modtag = finaltag.split("\"\>\<\/script");
-					finaltag = modtag[0]+"\;click\=\""+clickmacrord+"\"\>\<\/script"+modtag[1];
-					modtag = finaltag.split("\<a href\=\"");
-					finaltag = modtag[0]+"\<a href\=\""+clickmacrord+modtag[1];
+					
 
 			}
 			
