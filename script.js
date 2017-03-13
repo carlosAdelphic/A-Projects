@@ -127,7 +127,50 @@ function addMacros (adserver, tag)
 
 			if (cm != -1)
 			{
-				finaltag = finaltag.replace("click\=", "click\="+clickmacronordenc)
+				finaltag = finaltag.replace("click\=", "click\="+clickmacrord)
+				var modtag = finaltag.split("\<a href\=\"");
+				finaltag = modtag[0]+"\<a href\=\""+clickmacrord+"\}"+modtag[1];
+
+			}
+
+			else{
+					var modtag = finaltag.split("\"\>\<\/script");
+					finaltag = modtag[0]+"\;click\=\""+clickmacrord+"\"\>\<\/script"+modtag[1];
+					modtag = finaltag.split("\<a href\=\"");
+					finaltag = modtag[0]+"\<a href\=\""+clickmacrord+modtag[1];
+
+			}
+			
+			document.getElementById('tagwithmacros').value = finaltag;
+			break;
+
+	}
+
+	case ("Weborama"):
+
+			var cbm = tag.indexOf("random");
+			var cm = tag.indexOf("publisherclick");
+
+			if (tag.indexOf("weborama.fr") == -1) {
+
+				document.getElementById("errormsg").innerHTML = "Please review your tag, it doesn't look like an Weborama tag"
+				break
+			}
+
+			if (cbm != -1)
+			{
+				finaltag = tag.replaceAll("[RANDOM]", cbmacro);
+			}
+
+			else{
+
+				//Generally the cachebuster variable is there
+
+			}
+
+			if (cm != -1)
+			{
+				finaltag = finaltag.replace("[PUBLISHER_TRACKING_URL]", clickmacrord)
 				var modtag = finaltag.split("\<a href\=\"");
 				finaltag = modtag[0]+"\<a href\=\""+clickmacrord+"\}"+modtag[1];
 
