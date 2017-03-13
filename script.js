@@ -129,15 +129,15 @@ function addMacros (adserver, tag)
 			{
 				finaltag = finaltag.replace("click\=", "click\="+clickmacrord)
 				var modtag = finaltag.split("\<a href\=\"");
-				finaltag = modtag[0]+"\<a href\=\""+clickmacrord+"\}"+modtag[1];
+				finaltag = modtag[0]+"\<a href\=\""+clickmacrord+modtag[1];
 
 			}
 
 			else{
-					var modtag = finaltag.split("\"\>\<\/script");
-					finaltag = modtag[0]+"\;click\=\""+clickmacrord+"\"\>\<\/script"+modtag[1];
-					modtag = finaltag.split("\<a href\=\"");
-					finaltag = modtag[0]+"\<a href\=\""+clickmacrord+modtag[1];
+				var modtag = finaltag.split("\"\>\<\/script");
+				finaltag = modtag[0]+"\;click\=\""+clickmacrord+"\"\>\<\/script"+modtag[1];
+				modtag = finaltag.split("\<a href\=\"");
+				finaltag = modtag[0]+"\<a href\=\""+clickmacrord+modtag[1];
 
 			}
 			
@@ -170,7 +170,7 @@ function addMacros (adserver, tag)
 			{
 				finaltag = finaltag.replace("[PUBLISHER_TRACKING_URL]", clickmacrord)
 				var modtag = finaltag.split("\<a href\=\"");
-				finaltag = modtag[0]+"\<a href\=\""+clickmacrord+"\}"+modtag[1];
+				finaltag = modtag[0]+"\<a href\=\""+clickmacrord+modtag[1];
 
 			}
 
