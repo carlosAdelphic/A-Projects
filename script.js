@@ -168,7 +168,7 @@ function addMacros (adserver, tag)
 
 			if (cm != -1)
 			{
-				finaltag = finaltag.replace("publisherclick", clickmacrord)
+				finaltag = finaltag.replace("[PUBLISHER_TRACKING_URL]", clickmacrord)
 				var modtag = finaltag.split("\<a href\=\"");
 				finaltag = modtag[0]+"\<a href\=\""+clickmacrord+"\}"+modtag[1];
 
