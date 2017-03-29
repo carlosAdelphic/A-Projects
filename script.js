@@ -184,9 +184,9 @@ function addMacros (adserver, tag)
 			document.getElementById('tagwithmacros').value = finaltag;
 			break;
 
-	}
+	
 
-	case ("DCM_Legacy"):
+		case ("DCM_Legacy"):
 
 			var cbm = tag.indexOf("\;ord");
 			var cm = tag.indexOf("\;click");
@@ -223,9 +223,9 @@ function addMacros (adserver, tag)
 			document.getElementById('tagwithmacros').value = finaltag;
 			break;
 
-	}
+	
 
-	case ("DCM_INS"):
+		case ("DCM_INS"):
 
 			//var cbm = tag.indexOf("\;ord"); INS tags don't require our cache buster macros
 			var cm = tag.indexOf("data-dcm-click-tracker");
