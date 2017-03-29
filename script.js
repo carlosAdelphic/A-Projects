@@ -121,7 +121,7 @@ function addMacros (adserver, tag)
 
 			else{
 
-				//Generally the cachebuster variable is there
+				//Waiting to see exceptions in order to apply patches
 
 			}
 
@@ -167,7 +167,7 @@ function addMacros (adserver, tag)
 
 			else{
 
-				//Generally the cachebuster variable is there
+				//Waiting to see exceptions in order to apply patches
 
 			}
 
@@ -180,6 +180,86 @@ function addMacros (adserver, tag)
 			}
 
 			else{
+
+				//Waiting to see exceptions in order to apply patches
+
+
+			}
+			
+			document.getElementById('tagwithmacros').value = finaltag;
+			break;
+
+	}
+
+	case ("DCM_Legacy"):
+
+			var cbm = tag.indexOf("\;ord");
+			var cm = tag.indexOf("\;click");
+
+			if (tag.indexOf("ad.doubleclick.net") == -1) {
+
+				document.getElementById("errormsg").innerHTML = "Please review your tag, it doesn't look like a DCM legacy tag"
+				break
+			}
+
+			if (cbm != -1)
+			{
+				finaltag = tag.replaceAll("[timestamp]", cbmacro);
+			}
+
+			else{
+
+				//Waiting to see exceptions in order to apply patches
+
+			}
+
+			if (cm != -1)
+			{
+				//So far we've only observed DCM legacy tags without the click macro variable on them
+
+			}
+
+			else{
+
+				finaltag = finaltag.replace ("\"\>\<\/script", "\;click\="+clickmacrord+"\"\>\<\/script");
+
+			}
+			
+			document.getElementById('tagwithmacros').value = finaltag;
+			break;
+
+	}
+
+	case ("DCM_INS"):
+
+			//var cbm = tag.indexOf("\;ord"); INS tags don't require our cache buster macros
+			var cm = tag.indexOf("data-dcm-click-tracker");
+
+			if (tag.indexOf("googletagservices.com") == -1) {
+
+				document.getElementById("errormsg").innerHTML = "Please review your tag, it doesn't look like a DCM INS tag"
+				break
+			}
+
+			/*if (cbm != -1)
+			{
+				finaltag = tag.replaceAll("[timestamp]", cbmacro);
+			}
+
+			else{
+
+				//Waiting to see exceptions in order to apply patches
+
+			}*/
+
+			if (cm != -1)
+			{
+				finaltag = finaltag.replace ("data-dcm-click-tracker\=\'\'\>", "data-dcm-click-tracker\="+clickmacrord+"\'\>")
+			}
+
+			else{
+
+				finaltag = finaltag.replace ("\<script", "data-dcm-click-tracker\="+clickmacrord+"\'\>\<script")
 
 			}
 			
