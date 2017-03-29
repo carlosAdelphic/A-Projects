@@ -13,7 +13,8 @@ function addMacros (adserver, tag)
 
 	document.getElementById("errormsg").innerHTML = ""; // Initialize error message
 	document.getElementById("tagwithmacros").value = ""; // Initialize output textbox
-	document.getElementById('imageurl').style.color = "black"; //initialize color image url textbox (goes red if image url not found)
+	document.getElementById('imageurl').style.color = "black"; //Initialize color image url textbox (goes red if image url not found)
+	finaltag = tag; // Initialize finaltag value
 
 
 	if (tag.indexOf("ADELPHIC") != -1) {
@@ -215,13 +216,13 @@ function addMacros (adserver, tag)
 
 			if (cm != -1)
 			{
-				//So far we've only observed DCM legacy tags without the click macro variable on them
+				finaltag = finaltag.replace ("\;click=", "\;click\="+clickmacrord); //So far we've only observed DCM legacy tags without the click macro variable on them but in case...
 
 			}
 
 			else{
 
-				finaltag = finaltag.replace ("\"\>\<\/script", "\;click\="+clickmacrord+"\"\>\<\/script");
+				finaltag = finaltag.replace ("\;ord", "\;click\="+clickmacrord+"\;ord");
 
 			}
 			
@@ -254,12 +255,14 @@ function addMacros (adserver, tag)
 
 			if (cm != -1)
 			{
+				console.log ("click tracker found")
 				finaltag = finaltag.replace ("data-dcm-click-tracker\=\'\'\>", "data-dcm-click-tracker\="+clickmacrord+"\'\>")
 			}
 
 			else{
 
-				finaltag = finaltag.replace ("\<script", "data-dcm-click-tracker\="+clickmacrord+"\'\>\<script")
+				console.log ("click tracker not found")
+				finaltag = finaltag.replace ("data-dcm-app-id\=\'\'\>", "data-dcm-app-id\=\'\'\ndata-dcm-click-tracker\=\'"+clickmacrord+"\'\>")
 
 			}
 			
@@ -278,8 +281,19 @@ function addMacros (adserver, tag)
 
 	else {
 
+		regex = /<IMG.*?SRC=['"](.*?)['"]/; // Exception for DCM Legacy tags
+
+		if (regex.exec(finaltag) != null)
+		{
+		 var src = regex.exec(finaltag)[1];
+		 document.getElementById('imageurl').innerHTML = src;
+		}
+
+		else{
+
 		document.getElementById('imageurl').style.color = "red";
 		document.getElementById('imageurl').innerHTML = "No image found in the tag";
+		}
 	}
 
 }
