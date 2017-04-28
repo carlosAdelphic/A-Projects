@@ -6,21 +6,20 @@
 		
 	function previewCreative (creative_tag)
 	{
-		/*var ifr = document.createElement('iframe');
- 		ifr.setAttribute("frameborder", "0");
-  		ifr.setAttribute("id", "creativeLoader");
-  		var iframe_width = Number(document.getElementById('width').value) + 10;
-  		var iframe_height = Number(document.getElementById('height').value) + 10;
-		ifr.setAttribute("width", iframe_width); 
-		ifr.setAttribute("height", iframe_height);
-		*/
-		//console.log(document.getElementById('tag_loader').contentWindow.innerHTML)
-		document.getElementById('tag_loader').contentWindow.document.write(creative_tag);
+
+
+		
 
 		//we add the button for screenshoting the creative
 		/*
 		var screenshot_btn = "<button style=\"margin-left:15px\" type=\"Preview_Button\" onclick=\"generateScreenshot()\">Take Screenshot of Creative</button>"
 		document.getElementById("buttons_cell").innerHTML += screenshot_btn;*/
+
+		//Celtra preview URL
+		var celtra_id = iframe_width;
+		var celtra_url = "<div class=\"celtra-ad-v3\" style=\"z-index: 1;\"><img src=\"data:image/png,celtra\" style=\"display: none\" onerror=\"(function(img) {var params = {&quot;purpose&quot;:&quot;preview&quot;,&quot;overrides.clientTimestamp&quot;:null,&quot;overrides.clientTimeZoneOffsetInMinutes&quot;:null,&quot;overrides.ipCityGeonameId&quot;:null,&quot;overrides.ipPrincipalSubdivisionCode&quot;:null,&quot;overrides.ipRegionCode&quot;:null,&quot;overrides.ipCity&quot;:null,&quot;overrides.ipCountryCode&quot;:null,&quot;overrides.weather.currentCondition&quot;:null,&quot;overrides.weather.apparentTemperature&quot;:null,&quot;overrides.weather.windy&quot;:null,&quot;overrides.customAudiences&quot;:null,&quot;overrides.deviceInfo.osName&quot;:null,&quot;overrides.placementId&quot;:null};var req = document.createElement(&quot;script&quot;);req.id = params.scriptId = &quot;celtra-script-&quot; + (window.celtraScriptIndex = (window.celtraScriptIndex||0)+1);params.clientTimestamp = new Date/1000;params.clientTimeZoneOffsetInMinutes = new Date().getTimezoneOffset();var src = (window.location.protocol == &quot;https:&quot; ? &quot;https&quot; : &quot;http&quot;) + &quot;:\/\/ads.celtra.com\/"+celtra_id+"\/preview.js?&quot;;for (var k in params) {src += &quot;&amp;&quot;+encodeURIComponent(k)+&quot;=&quot;+ encodeURIComponent(params[k]);}req.src = src;img.parentNode.insertBefore(req, img.nextSibling);})(this);\"><script id=\"celtra-script-1\" src=\"http://ads.celtra.com/"+celtra_id+"/preview.js?&amp;purpose=preview&amp;overrides.clientTimestamp=null&amp;overrides.clientTimeZoneOffsetInMinutes=null&amp;overrides.ipCityGeonameId=null&amp;overrides.ipPrincipalSubdivisionCode=null&amp;overrides.ipRegionCode=null&amp;overrides.ipCity=null&amp;overrides.ipCountryCode=null&amp;overrides.weather.currentCondition=null&amp;overrides.weather.apparentTemperature=null&amp;overrides.weather.windy=null&amp;overrides.customAudiences=null&amp;overrides.deviceInfo.osName=null&amp;overrides.placementId=null&amp;scriptId=celtra-script-1&amp;clientTimestamp=1493413389.444&amp;clientTimeZoneOffsetInMinutes=-60\"></script><script src=\"http://cache.celtra.com/api/creatives/"+celtra_id+"/compiled/preview.js?v=28-38bfc9f8fc&amp;secure=0&amp;inmobi=0\"></script></div>";
+
+		document.getElementById('tag_loader').contentWindow.document.write(celtra_url);
 
 
 
@@ -92,12 +91,9 @@
 	  </tr>
 	  <tr>
 	  	<td style="text-align: left" id="preview">
+  
+	  		<iframe src="tag_loader.html" scrolling="no" name="tag_loader" id="tag_loader" data-field="ad" width="320px" allowfullscreen="" height="480px" frameBorder="0" style="padding: 0; overflow: hidden"></iframe>
 	  		
-	  		<div data-action="disableScroll">
-                <span data-field="frameUrl" data-field-uid="1">     
-	  				<iframe src="tag_loader.html" scrolling="no" name="tag_loader" id="tag_loader" data-field="ad" width="320px" allowfullscreen="" height="480px" frameBorder="0" style="padding: 0; overflow: hidden"></iframe>
-	  			</span>
-	  		 </div>
 	  		
 	  	</td>
 	  	<td style="text-align: left" id="screenshot"></td>
