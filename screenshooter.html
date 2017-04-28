@@ -6,26 +6,32 @@
 		
 	function previewCreative (creative_tag)
 	{
-		var ifr = document.createElement('iframe');
+		/*var ifr = document.createElement('iframe');
  		ifr.setAttribute("frameborder", "0");
   		ifr.setAttribute("id", "creativeLoader");
   		var iframe_width = Number(document.getElementById('width').value) + 10;
   		var iframe_height = Number(document.getElementById('height').value) + 10;
 		ifr.setAttribute("width", iframe_width); 
 		ifr.setAttribute("height", iframe_height);
-		document.getElementById("preview").appendChild(ifr);
-		console.log(document.getElementById("preview").innerHTML)
-		document.getElementById('creativeLoader').contentWindow.document.write(creative_tag);
+		*/
+
+		document.getElementById('tag_loader').contentWindow.document.body.write(creative_tag);
 
 		//we add the button for screenshoting the creative
+		/*
 		var screenshot_btn = "<button style=\"margin-left:15px\" type=\"Preview_Button\" onclick=\"generateScreenshot()\">Take Screenshot of Creative</button>"
-		document.getElementById("buttons_cell").innerHTML += screenshot_btn;
+		document.getElementById("buttons_cell").innerHTML += screenshot_btn;*/
+
+
 
 	}
 
 	function generateScreenshot()
 	{
-		var loader = document.getElementById("creativeLoader");
+		var loader = document.getElementById('creativeLoader').contentWindow.document.body;
+
+		console.log(loader)
+
 
 		
 /*
@@ -38,10 +44,13 @@
 		  height: Number(document.getElementById('height').value)
 		});*/
 
-		html2canvas(document.body, {
+		html2canvas(loader, {
 		  onrendered: function(canvas) {
+		  	console.log("Rendered")
 		    document.body.appendChild(canvas);
-		  }
+		  },
+		  width: 600,
+		  height: 600
 		});
 
 
@@ -82,7 +91,7 @@
 	  	<td><p style="font-size:14px">Static screenshot: </p></td>
 	  </tr>
 	  <tr>
-	  	<td style="text-align: left" id="preview"></td>
+	  	<td style="text-align: left" id="preview"><iframe src="tag_loader.html" name="tag_loader" id="tag_loader" width="320" height="480"></iframe></td>
 	  	<td style="text-align: left" id="screenshot"></td>
 	  </tr>
 	  
