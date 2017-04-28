@@ -15,7 +15,8 @@
 		ifr.setAttribute("height", iframe_height);
 		*/
 		//console.log(document.getElementById('tag_loader').contentWindow.innerHTML)
-		document.getElementById('tag_loader').contentWindow.document.write(creative_tag);
+		var finaltag = "<div>"+creative_tag+"</div>"
+		document.getElementById('tag_loader').contentWindow.document.write(final_tag);
 
 		//we add the button for screenshoting the creative
 		/*
