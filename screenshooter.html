@@ -2,62 +2,37 @@
 <html>
 <head>
 	<script type="text/javascript" src="html2canvas.js"></script>
+	
+	<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.5/jquery.min.js"></script>
 	<script type="text/javascript">
+
+
+	$(document).ready(function() {	//Celtra preview URL
 		
-	function previewCreative (creative_tag)
-	{
-
-
+		var ifr = document.createElement('iframe');
+ 		ifr.setAttribute("frameborder", "0");
+  		ifr.setAttribute("id", "tag_loader");
+  		var iframe_width = Number(document.getElementById('width').value) + 10;
+  		var iframe_height = Number(document.getElementById('height').value) + 10;
+		ifr.setAttribute("width", iframe_width); 
+		ifr.setAttribute("height", iframe_height);
+		
+		document.getElementById('preview').appendChild(ifr);
+		
 		
 
-		//we add the button for screenshoting the creative
-		/*
-		var screenshot_btn = "<button style=\"margin-left:15px\" type=\"Preview_Button\" onclick=\"generateScreenshot()\">Take Screenshot of Creative</button>"
-		document.getElementById("buttons_cell").innerHTML += screenshot_btn;*/
 
-		//Celtra preview URL
-		var celtra_id = document.getElementById('width').value;
-		var celtra_tag = "\<html\>\<head\>\<meta http-equiv=\"Access-Control-Allow-Origin\" content=\"*\"\>\<\/head\>\<body\>\<script\>document.write(\"\<html style=\"padding: 0px; margin: 0px; width: 100%; height: 100%;\"\>\<head\>\<meta http-equiv=\"Access-Control-Allow-Origin\" content=\"*\"\/\>\<\/head\>\<body style=\"margin: 0; padding: 0\"\>\<script id=\"celtra-script-1\" src=\"https:\/\/ads.celtra.com\/4f79f254\/preview.js?&amp;purpose=preview&amp;overrides.clientTimestamp=null&amp;overrides.clientTimeZoneOffsetInMinutes=null&amp;overrides.ipCityGeonameId=null&amp;overrides.ipPrincipalSubdivisionCode=null&amp;overrides.ipRegionCode=null&amp;overrides.ipCity=null&amp;overrides.ipCountryCode=null&amp;overrides.weather.currentCondition=null&amp;overrides.weather.apparentTemperature=null&amp;overrides.weather.windy=null&amp;overrides.customAudiences=null&amp;overrides.deviceInfo.osName=null&amp;overrides.placementId=null&amp;scriptId=celtra-script-1&amp;clientTimestamp=1493417591.023&amp;clientTimeZoneOffsetInMinutes=-60\"\>\<\/script\>\<\/body\>\<\/script\>\<\/body\>\<\/html\>"
-		
+		$("#preview_btn").click(function() {
 
-		document.getElementById('tag_loader').contentWindow.document.write(celtra_tag);
+			$("#tag_loader").contents().find('body').append('<scr' + 'ipt type="text/javascript" src="preview.js"></scr' + 'ipt>');
 
-
-
-	}
-
-	function generateScreenshot()
-	{
-		var loader = document.getElementById('creativeLoader').contentWindow.document.body;
-
-		console.log(loader)
-
-
-		
-/*
-		html2canvas(loader, {
-		  onrendered: function(canvas) {
-		  	console.log("generating")
-		    document.getElementById("screenshot").innerHTML = canvas;
-		  },
-		  width: Number(document.getElementById('width').value),
-		  height: Number(document.getElementById('height').value)
-		});*/
-
-		html2canvas(loader, {
-		  onrendered: function(canvas) {
-		  	console.log("Rendered")
-		    document.body.appendChild(canvas);
-		  },
-		  width: 600,
-		  height: 600
+		    console.log("He entrado")
 		});
 
-
-	}
-
+	});
 
 	</script>
+	
 </head>
 <body>
 
@@ -81,7 +56,7 @@
 	  </tr>
 	   <tr>
 	  	<td></td>
-	  	<td style="text-align: left" id="buttons_cell"><button type="Preview_Button" onclick="previewCreative(document.getElementById('tag').value)">Preview Creative</button></td>
+	  	<td style="text-align: left" id="preview_btn"><button type="Preview_Button">Preview Creative</button></td>
 	  </tr>
 	</table>
 
@@ -93,9 +68,6 @@
 	  <tr>
 	  	<td style="text-align: left" id="preview">
   
-	  		<iframe src="tag_loader.html" scrolling="no" name="tag_loader" id="tag_loader" data-field="ad" width="320px" allowfullscreen="" height="480px" frameBorder="0" style="padding: 0; overflow: hidden"></iframe>
-	  		
-	  		
 	  	</td>
 	  	<td style="text-align: left" id="screenshot"></td>
 	  </tr>
