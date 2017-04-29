@@ -40,7 +40,12 @@
 
 			case ("Celtra"):
 
-				doc.write("\<html style=\"padding: 0px; top: margin: 0px; width: 100\%; height: 100\%;\"\>\<head\>\<scr" + "ipt id=\"celtra-script-1\" type=\"text/javascript\" src=\"https://ads.celtra.com/a7d83f47/preview.js?&purpose=preview&overrides.clientTimestamp=null&overrides.clientTimeZoneOffsetInMinutes=null&overrides.ipCityGeonameId=null&overrides.ipPrincipalSubdivisionCode=null&overrides.ipRegionCode=null&overrides.ipCity=null&overrides.ipCountryCode=null&overrides.weather.currentCondition=null&overrides.weather.apparentTemperature=null&overrides.weather.windy=null&overrides.customAudiences=null&overrides.deviceInfo.osName=null&overrides.placementId=null&scriptId=celtra-script-1&clientTimestamp=1493413389.444&clientTimeZoneOffsetInMinutes=-60\"\>\</scr" + "ipt\>\<meta http-equiv=\"Access-Control-Allow-Origin\" content=\"*\"\>\</head\>\<body style=\"margin: 0; padding: 0\"\>\</body\>\</html\>");
+				var id_finder = Number(tag.indexOf("celtra.com/"))+11;
+				var celtra_id = tag.substring(Number(id_finder), Number(id_finder)+8);
+
+				console.log("id finder="+id_finder+" & celtra_id="+celtra_id)
+
+				doc.write("\<html style=\"padding: 0px; top: margin: 0px; width: 100\%; height: 100\%;\"\>\<head\>\<scr" + "ipt id=\"celtra-script-1\" type=\"text/javascript\" src=\"https://ads.celtra.com/"+celtra_id+"/preview.js?&purpose=preview&overrides.clientTimestamp=null&overrides.clientTimeZoneOffsetInMinutes=null&overrides.ipCityGeonameId=null&overrides.ipPrincipalSubdivisionCode=null&overrides.ipRegionCode=null&overrides.ipCity=null&overrides.ipCountryCode=null&overrides.weather.currentCondition=null&overrides.weather.apparentTemperature=null&overrides.weather.windy=null&overrides.customAudiences=null&overrides.deviceInfo.osName=null&overrides.placementId=null&scriptId=celtra-script-1&clientTimestamp=1493413389.444&clientTimeZoneOffsetInMinutes=-60\"\>\</scr" + "ipt\>\<meta http-equiv=\"Access-Control-Allow-Origin\" content=\"*\"\>\</head\>\<body style=\"margin: 0; padding: 0\"\>\</body\>\</html\>");
 
 				break;
 
@@ -141,7 +146,7 @@
 	  	<td colspan="2">Not working or having an issue?Let us know <a href="mailto:carlos@adelphic.com?subject=Issues with my tag&body=Please remember to add the tag you're having issues with here">here</a></td>
 	  </tr>
 	  <tr style="height: 20px; font-size: 14px; vertical-align:bottom; ">
-	  	<td colspan="2"><a href="versioncontrol.html" target="_blank">Version control hola</a></td>
+	  	<td colspan="2"><a href="versioncontrol.html" target="_blank">Version control</a></td>
 	  </tr>
 	</table>
 
