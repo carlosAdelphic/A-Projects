@@ -5,6 +5,7 @@
 	<script type="text/javascript">
 
 
+
 	var iframe_width = 0; 
 	var iframe_height = 0;	
 	var ifr = document.createElement('iframe');
@@ -17,6 +18,11 @@
 	function previewCreative(adserver, tag)	//Celtra preview URL
 		
 	{
+
+		//Initialise
+
+		document.getElementById("errormsg").innerHTML = ""; // Initialize error message
+		document.getElementById("errormsg").style.color = "black";
 
 		iframe_width = Number(document.getElementById('width').value) -2; //we need to take into account the added borders, hence the -2
 		iframe_height = Number(document.getElementById('height').value) -2;
@@ -34,11 +40,18 @@
 			case ("DCM"):
 
 
+				if (tag.indexOf("googletagservices.com") == -1) {
+
+					document.getElementById("errormsg").style.color = "red";
+					document.getElementById("errormsg").innerHTML = "Please review your tag, it doesn't look like a DCM INS tag";
+					break;
+				}
+
+
 				if (tag.indexOf("fw.adsafeprotected.com") != -1)// we need to remove the IAS wrapping to preview the ad
 				{
 					var IAS_finder = Number(tag.indexOf("'>"))+2;
 					var new_tag = tag.substring(0, IAS_finder);
-					console.log(new_tag);
 					new_tag += "\<script src=\'https:\/\/www.googletagservices.com\/dcm\/dcmads.js\'\>\<\/script\>\<\/ins\>"
 					doc.write("\<html style=\"padding: 0px; margin: 0px; width: 100\%; height: 100\%;\"\>\<head\>\<\/head\>\<body style=\"margin-top: -1; margin-left: -1px; padding: 0\"\>"+new_tag+"\</body\>\</html\>");
 
@@ -48,9 +61,17 @@
 					doc.write("\<html style=\"padding: 0px; margin: 0px; width: 100\%; height: 100\%;\"\>\<head\>\<\/head\>\<body style=\"margin-top: -1; margin-left: -1px; padding: 0\"\>"+tag+"\</body\>\</html\>");}
 
 				
-				break;
+			break;
 
 			case ("Celtra"):
+
+
+				if (tag.indexOf("celtra.com") == -1) {
+
+					document.getElementById("errormsg").style.color = "red";
+					document.getElementById("errormsg").innerHTML = "Please review your tag, it doesn't look like a Celtra tag";
+					break;
+				}
 
 				var id_finder = Number(tag.indexOf("celtra.com/"))+11;
 				var celtra_id = tag.substring(Number(id_finder), Number(id_finder)+8);
@@ -59,7 +80,7 @@
 
 				doc.write("\<html style=\"padding: 0px; margin: 0px; width: 100\%; height: 100\%;\"\>\<head\>\<scr" + "ipt id=\"celtra-script-1\" type=\"text/javascript\" src=\"https://ads.celtra.com/"+celtra_id+"/preview.js?&purpose=preview&overrides.clientTimestamp=null&overrides.clientTimeZoneOffsetInMinutes=null&overrides.ipCityGeonameId=null&overrides.ipPrincipalSubdivisionCode=null&overrides.ipRegionCode=null&overrides.ipCity=null&overrides.ipCountryCode=null&overrides.weather.currentCondition=null&overrides.weather.apparentTemperature=null&overrides.weather.windy=null&overrides.customAudiences=null&overrides.deviceInfo.osName=null&overrides.placementId=null&scriptId=celtra-script-1&clientTimestamp=1493413389.444&clientTimeZoneOffsetInMinutes=-60\"\>\</scr" + "ipt\>\<meta http-equiv=\"Access-Control-Allow-Origin\" content=\"*\"\>\</head\>\<body style=\"margin: 0; padding: 0\"\>\</body\>\</html\>");
 
-				break;
+			break;
 
 		}
 
@@ -112,7 +133,7 @@
 	  	<td style="text-align: left" id="preview">
   
 	  	</td>
-	  	<td style="text-align: left" id="screenshot"></td>
+	  	<td style="text-align: left" id="errormsg"></td>
 	  </tr>
 	  
 	  <tr style="height: 40px; font-size: 14px; vertical-align:bottom; "">
