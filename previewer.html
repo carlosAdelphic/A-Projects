@@ -24,6 +24,7 @@
 		document.getElementById("errormsg").innerHTML = ""; // Initialize error message
 		document.getElementById("errormsg").style.color = "black";
 
+
 		iframe_width = Number(document.getElementById('width').value) -2; //we need to take into account the added borders, hence the -2
 		iframe_height = Number(document.getElementById('height').value) -2;
 		ifr.setAttribute("width", iframe_width); 
@@ -44,6 +45,8 @@
 
 					document.getElementById("errormsg").style.color = "red";
 					document.getElementById("errormsg").innerHTML = "Please review your tag, it doesn't look like a DCM INS tag";
+					ifr.setAttribute("width", 0); 
+					ifr.setAttribute("height", 0);
 					break;
 				}
 
@@ -70,6 +73,8 @@
 
 					document.getElementById("errormsg").style.color = "red";
 					document.getElementById("errormsg").innerHTML = "Please review your tag, it doesn't look like a Celtra tag";
+					ifr.setAttribute("width", 0); 
+					ifr.setAttribute("height", 0);
 					break;
 				}
 
@@ -80,6 +85,42 @@
 
 				doc.write("\<html style=\"padding: 0px; margin: 0px; width: 100\%; height: 100\%;\"\>\<head\>\<scr" + "ipt id=\"celtra-script-1\" type=\"text/javascript\" src=\"https://ads.celtra.com/"+celtra_id+"/preview.js?&purpose=preview&overrides.clientTimestamp=null&overrides.clientTimeZoneOffsetInMinutes=null&overrides.ipCityGeonameId=null&overrides.ipPrincipalSubdivisionCode=null&overrides.ipRegionCode=null&overrides.ipCity=null&overrides.ipCountryCode=null&overrides.weather.currentCondition=null&overrides.weather.apparentTemperature=null&overrides.weather.windy=null&overrides.customAudiences=null&overrides.deviceInfo.osName=null&overrides.placementId=null&scriptId=celtra-script-1&clientTimestamp=1493413389.444&clientTimeZoneOffsetInMinutes=-60\"\>\</scr" + "ipt\>\<meta http-equiv=\"Access-Control-Allow-Origin\" content=\"*\"\>\</head\>\<body style=\"margin: 0; padding: 0\"\>\</body\>\</html\>");
 
+			break;
+
+			case ("Kwanzoo"):
+
+
+				if (tag.indexOf("kwanzoo.com") == -1) {
+
+					document.getElementById("errormsg").style.color = "red";
+					document.getElementById("errormsg").innerHTML = "Please review your tag, it doesn't look like a Kwanzoo tag";
+					ifr.setAttribute("width", 0); 
+					ifr.setAttribute("height", 0);
+				}
+
+				
+				else{
+					doc.write("\<html style=\"padding: 0px; margin: 0px; width: 100\%; height: 100\%;\"\>\<head\>\<\/head\>\<body style=\"margin-top: -1; margin-left: -1px; padding: 0\"\>"+tag+"\</body\>\</html\>");}
+
+				
+			break;
+
+			case ("Vindico"):
+
+
+				if (tag.indexOf("vindicosuite.com") == -1) {
+
+					document.getElementById("errormsg").style.color = "red";
+					document.getElementById("errormsg").innerHTML = "Please review your tag, it doesn't look like a Vindico tag";
+					ifr.setAttribute("width", 0); 
+					ifr.setAttribute("height", 0);
+				}
+
+				
+				else{
+					doc.write("\<html style=\"padding: 0px; margin: 0px; width: 100\%; height: 100\%;\"\>\<head\>\<\/head\>\<body style=\"margin-top: -1; margin-left: -1px; padding: 0\"\>"+tag+"\</body\>\</html\>");}
+
+				
 			break;
 
 		}
@@ -111,6 +152,8 @@
 	    <td style="padding: 0"><select name="adserver" id="adserver">
 		<option value="DCM">DCM</option>
 		<option value="Celtra">Celtra</option>
+		<option value="Vindico">Vindico</option>
+		<option value="Kwanzoo">Kwanzoo</option>
 		</select></td> 
 	  </tr>
 	  <tr>
