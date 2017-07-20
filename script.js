@@ -17,7 +17,7 @@ function addMacros (adserver, tag)
 	finaltag = tag; // Initialize finaltag value
 
 
-	if (tag.indexOf("ADELPHIC") != -1) {
+	if (tag.indexOf("\{ADELPHIC_") != -1) {
 
 		document.getElementById("errormsg").innerHTML = "Please review your tag, looks like Adelphic's macros are already there."
 		return;
